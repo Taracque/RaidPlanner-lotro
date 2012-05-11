@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="raidplanner_theme" version="1.5" method="upgrade">
+	<name>RaidPlanner WoW Theme</name>
+	<creationDate>2012-05-08</creationDate>
+	<author>Taracque</author>
+	<authorEmail>taracque@taracque.hu</authorEmail>
+	<authorUrl>http://taracque.hu</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>http://www.gnu.org/licenseses/gpl-2.0.html GNU/GPL</license>
+	<version>0.0.1</version>
+	<releaseDate>2012-05-08</releaseDate>
+	<releaseType>Development release</releaseType>
+	<!-- The description is optional and defaults to the name -->
+	<description>RaidPlanner WoW Theme</description>
+	<!-- Install Database Section -->
+	<install>
+	</install>
+	<update>
+	</update>
+    <uninstall>
+	</uninstall>
+	<fileset destination="raid_icons" folder="raid_icons">
+		<file>baradin_hold.png</file>
+		<file>bastion_of_twilight.png</file>
+		<file>blackwing_descent.png</file>
+		<file>burning_crusade.png</file>
+		<file>classic.png</file>
+		<file>dragon_soul.png</file>
+		<file>dungeon.png</file>
+		<file>firelands.png</file>
+		<file>lich_king.png</file>
+		<file>pvp.png</file>
+		<file>star.png</file>
+		<file>throne_of_four_winds.png</file>
+		<file>wow.png</file>
+	</fileset>
+	<fileset destination="role_icons" folder="role_icons">
+		<file>role_heal.png</file>
+		<file>role_melee_dps.png</file>
+		<file>role_ranged_dps.png</file>
+		<file>role_tank.png</file>
+	</fileset>
+	<fileset destination="class_icons" folder="class_icons">
+		<file>class_1.png</file>
+		<file>class_2.png</file>
+		<file>class_3.png</file>
+		<file>class_4.png</file>
+		<file>class_5.png</file>
+		<file>class_6.png</file>
+		<file>class_7.png</file>
+		<file>class_8.png</file>
+		<file>class_9.png</file>
+		<file>class_11.png</file>
+	</fileset>
+	<fileset>
+		<folder>wow_tabards</folder>
+	</fileset>
+	<administration>
+		<fileset destination="plugins" folder="plugins">
+			<folder>wow_armory</folder>
+		</fileset>
+	</administration>
+</install>
