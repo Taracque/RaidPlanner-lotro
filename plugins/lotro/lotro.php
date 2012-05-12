@@ -32,26 +32,10 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 		$url .= rawurlencode( $world_name ) . "/g/";
 		$url .= rawurlencode( $guild_data->guild_name );
 
-		// Init cURL
-		$ch = curl_init();
-
-		// Language
-		$header[] = 'Accept-Language: en_EN';
-		// Browser
-		$browser = 'Mozilla/5.0 (compatible; MSIE 7.01; Windows NT 5.1)';
-		
-		// cURL options
-		curl_setopt ($ch, CURLOPT_URL, $url );
-		curl_setopt ($ch, CURLOPT_HTTPHEADER, $header); 
-		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 15);
-		curl_setopt ($ch, CURLOPT_USERAGENT, $browser);
-		
-		$url_string = curl_exec($ch);
-		curl_close($ch);
+		$data = $this->getData( $url );
 
 		$xml_parser =& JFactory::getXMLParser( 'simple' );
-		if (( !$xml_parser->loadString( $url_string ) ) || (!$xml_parser->document) ) {
+		if (( !$xml_parser->loadString( $data ) ) || (!$xml_parser->document) ) {
 			if (json_last_error() != JSON_ERROR_NONE)
 			{
 				JError::raiseWarning('100','LotroSync data decoding error');
