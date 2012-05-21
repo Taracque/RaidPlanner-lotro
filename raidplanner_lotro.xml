@@ -12,16 +12,58 @@
 	<releaseType>Development release</releaseType>
 	<description>RaidPlanner Lord of the Rings Theme</description>
 	<install>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Burglar'">	INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#C79C6E',	'Burglar', 'class_lotro_burglar')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Captain'">	INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#F58CBA',	'Captain', 'class_lotro_captain')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Champion'">	INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#C41F3B',	'Champion', 'class_lotro_champion')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Guardian'">	INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#558A84',	'Guardian', 'class_lotro_guardian')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Hunter'">		INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#ABD473',	'Hunter', 'class_lotro_hunter')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Lore-master'">INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#0070DE',	'Lore-master', 'class_lotro_lore_master')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Minstrel'">	INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#8CA5A3',	'Minstrel', 'class_lotro_minstrel')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Rune-keeper'">INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#69CCF0',	'Rune-keeper', 'class_lotro_rune_keeper')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_class WHERE class_name='Warden'">		INSERT IGNORE INTO `#__raidplanner_class` (`class_color`, `class_name`, `class_css`) VALUES ('#A49900',	'Warden', 'class_lotro_warden')</sql>
+
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_race WHERE race_name='Race of Man'">	INSERT IGNORE INTO `#__raidplanner_race` (`race_name`) VALUES ('Race of Man')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_race WHERE race_name='Hobbit'">		INSERT IGNORE INTO `#__raidplanner_race` (`race_name`) VALUES ('Hobbit')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_race WHERE race_name='Elf'">			INSERT IGNORE INTO `#__raidplanner_race` (`race_name`) VALUES ('Elf')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_race WHERE race_name='Dwarf'">		INSERT IGNORE INTO `#__raidplanner_race` (`race_name`) VALUES ('Dwarf')</sql>
+
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Tank'">			INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Tank',			'white',	'#93232b',	'black',	'role_tank.png')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Melee DPS'">	INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Melee DPS',	'white',	'#a06729',	'black',	'role_melee_dps.png')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Ranged DPS'">	INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Ranged DPS',	'white',	'#2983a0',	'black',	'role_ranged_dps.png')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Healer'">		INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Healer',		'white',	'#6aa64d',	'black',	'role_heal.png')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Buffer'">		INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Buffer',		'white',	'#6aa64d',	'black',	'role_buffer.png')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Crowd Control'">INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Crowd Control','white',	'#6aa64d',	'black',	'role_cc.png')</sql>
+		<sql condition="SELECT COUNT(*)=0 FROM #__raidplanner_role WHERE role_name='Debuffer'">		INSERT IGNORE INTO `#__raidplanner_role` (`role_name`, `body_color`, `header_color`, `font_color`, `icon_name`) VALUES ('Debuffer',		'white',	'#6aa64d',	'black',	'role_debuffer.png')</sql>
 	</install>
-	<update>
-	</update>
     <uninstall>
+    	<sql>DELETE FROM #__raidplanner_class WHERE class_name IN ('Burglar', 'Captain', 'Champion', 'Guardian', 'Hunter', 'Lore-master', 'Minstrel', 'Rune-keeper', 'Warden')</sql>
+    	<sql>DELETE FROM #__raidplanner_race WHERE race_name IN ('Dwarf', 'Elf', 'Hobbit', 'Race of Man')</sql>
+    	<sql>DELETE FROM #__raidplanner_role WHERE role_name IN ('Tank', 'Melee DPS', 'Ranged DPS', 'Healer', 'Buffer', 'Crowd Control', 'Debuffer')</sql>
 	</uninstall>
 	<fileset destination="raid_icons" folder="raid_icons">
 	</fileset>
 	<fileset destination="role_icons" folder="role_icons">
+		<file>role_heal.png</file>
+		<file>role_melee_dps.png</file>
+		<file>role_ranged_dps.png</file>
+		<file>role_tank.png</file>
+		<file>role_buffer.png</file>
+		<file>role_debuffer.png</file>
+		<file>role_cc.png</file>
 	</fileset>
 	<fileset destination="class_icons" folder="class_icons">
+		<file>lotro_burglar.png</file>
+		<file>lotro_captain.png</file>
+		<file>lotro_champion.png</file>
+		<file>lotro_guardian.png</file>
+		<file>lotro_hunter.png</file>
+		<file>lotro_lore_master.png</file>
+		<file>lotro_minstrel.png</file>
+		<file>lotro_rune_keeper.png</file>
+		<file>lotro_warden.png</file>
+	</fileset>
+	<fileset destination="css" folder="css">
+		<file>raidplanner_lotro.css</file>
 	</fileset>
 	<administration>
 		<fileset destination="plugins" folder="plugins">
