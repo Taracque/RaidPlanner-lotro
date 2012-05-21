@@ -13,12 +13,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class RaidPlannerPluginLotro extends RaidPlannerPlugin
 {
-
-	protected $provide_sync = true;
-
 	function __construct( $guild_id, $guild_name, $params)
 	{
 		parent::__construct( $guild_id, $guild_name, $params);
+
+		$this->provide_sync = true;
 	}
 
 	public function doSync( $showOkStatus = false )
