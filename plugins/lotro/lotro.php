@@ -13,6 +13,9 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class RaidPlannerPluginLotro extends RaidPlannerPlugin
 {
+
+	protected $provide_sync = true;
+
 	function __construct( $guild_id, $guild_name, $params)
 	{
 		parent::__construct( $guild_id, $guild_name, $params);
@@ -138,5 +141,12 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 		} else {
 			JError::raiseWarning('100', 'LotroSync data doesn\'t match');
 		}
+	}
+
+	public function loadCSS()
+	{
+		JHTML::stylesheet('raidplanner_lotro.css', 'images/raidplanner/css/' );
+		
+		return true;
 	}
 }
