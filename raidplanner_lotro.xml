@@ -41,6 +41,17 @@
     	<sql>DELETE FROM #__raidplanner_role WHERE role_name IN ('Tank', 'Melee DPS', 'Ranged DPS', 'Healer', 'Buffer', 'Crowd Control', 'Debuffer')</sql>
 	</uninstall>
 	<fileset destination="raid_icons" folder="raid_icons">
+		<file>barad_guldur.png</file>
+		<file>carn_dûm.png</file>
+		<file>dar_narbugud.png</file>
+		<file>draigoch's_lair.png</file>
+		<file>helegrod.png</file>
+		<file>lord_of_the_rings.png</file>
+		<file>ost_dungoth.png</file>
+		<file>rp_event.png</file>
+		<file>the_rift_of_nûrz_ghâshu.png</file>
+		<file>the_tower_of_orthanc.png</file>
+		<file>the_vile_maw.png</file>
 	</fileset>
 	<fileset destination="role_icons" folder="role_icons">
 		<file>role_heal.png</file>
