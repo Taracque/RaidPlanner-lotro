@@ -24,15 +24,15 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 	{
 		$db = & JFactory::getDBO();
 
-		$guild_id = $guild_data->guild_id;
+		$guild_id = $this->guild_id;
 		
-		$developer = $guild_data->params['developer_name'];
-		$api_key = $guild_data->params['lotro_api_key'];
-		$world_name = $guild_data->params['world_name'];
+		$developer = $this->params['developer_name'];
+		$api_key = $this->params['lotro_api_key'];
+		$world_name = $this->params['world_name'];
 
 		$url = "http://data.lotro.com/" . $developer . "/" . $api_key ."/guildroster/w/";
 		$url .= rawurlencode( $world_name ) . "/g/";
-		$url .= rawurlencode( $guild_data->guild_name );
+		$url .= rawurlencode( $this->guild_name );
 
 		$data = $this->getData( $url );
 
@@ -61,13 +61,13 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 			$guild_id=$db->insertid();
 		}
 
-		if (($guild_data->guild_name == $xml_parser->document->guild[0]->attributes('name')) && ($xml_parser->document->guild[0]->attributes('name')!=''))
+		if (($this->guild_name == $xml_parser->document->guild[0]->attributes('name')) && ($xml_parser->document->guild[0]->attributes('name')!=''))
 		{
 			$params = array(
 				'world_name'	=>	$xml_parser->document->guild[0]->attributes('world'),
 			);
 
-			$params = array_merge( $guild_data->params, $params );
+			$params = array_merge( $this->params, $params );
 			
 			$query = "UPDATE #__raidplanner_guild SET
 							guild_name=".$db->Quote($xml_parser->document->guild[0]->attributes('name')).",
