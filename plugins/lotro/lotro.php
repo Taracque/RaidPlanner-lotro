@@ -1,6 +1,6 @@
 <?php
 /*------------------------------------------------------------------------
-# Lotro ÅPI Sync Plugin
+# Lotro API Sync Plugin
 # com_raidplanner - RaidPlanner Component
 # ------------------------------------------------------------------------
 # author    Taracque
@@ -38,11 +38,8 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 
 		$xml_parser =& JFactory::getXMLParser( 'simple' );
 		if (( !$xml_parser->loadString( $data ) ) || (!$xml_parser->document) ) {
-			if (json_last_error() != JSON_ERROR_NONE)
-			{
-				JError::raiseWarning('100','LotroSync data decoding error');
-				return null;
-			}
+			JError::raiseWarning('100','LotroSync data decoding error');
+			return null;
 		}
 		if ($xml_parser->document->name() != 'apiresponse')
 		{
