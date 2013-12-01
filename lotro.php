@@ -11,30 +11,57 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-class RaidPlannerPluginLotro extends RaidPlannerPlugin
+class RaidPlannerPluginLotro extends JPlugin
 {
-	function __construct( $guild_id, $guild_name, $params)
-	{
-		parent::__construct( $guild_id, $guild_name, $params);
+	private $guild_id = 0;
+	private $rp_params = array();
+	private $guild_name = '';
 
-		$this->provide_sync = true;
+	public function onRPInitGuild( $guildId, $params )
+	{
+		$db = & JFactory::getDBO();
+		$query = "SELECT guild_name,guild_id FROM #__raidplanner_guild WHERE guild_id=" . intval($guildId); 
+		$db->setQuery($query);
+		if ( $data = $db->loadObject() )
+		{
+			$this->guild_name = $data->guild_name;
+			$this->guild_id = $data->guild_id;
+			$this->rp_params = $params;
+		} else {
+			$this->guild_id = 0;
+		}
 	}
 
-	public function doSync( $showOkStatus = false )
+	public function onRPBeforeSync()
+	{
+		return true;
+	}
+
+	public function onRPSyncGuild( $showOkStatus = false, $syncInterval = 4, $forceSync = false  )
 	{
 		$db = & JFactory::getDBO();
 
+		$query = "SELECT IF(lastSync IS NULL,-1,DATE_ADD(lastSync, INTERVAL " . intval( $syncInterval ) . " HOUR)-NOW()) AS needSync,guild_name FROM #__raidplanner_guild WHERE guild_id=" . intval($this->guild_id); 
+		$db->setQuery($query);
+		if ( (!$forceSync) && ( !($needsync = $db->loadResult()) || ( $needsync>=0 ) ) )
+		{
+			/* Sync not needed, exit */
+			return false;
+		}
+
+		JLoader::register('RaidPlannerHelper', JPATH_ADMINISTRATOR . '/components/com_raidplanner/helper.php' );
+
 		$guild_id = $this->guild_id;
 		
-		$developer = $this->params['developer_name'];
-		$api_key = $this->params['lotro_api_key'];
-		$world_name = $this->params['world_name'];
+		$developer = $this->rp_params['developer_name'];
+		$api_key = $this->rp_params['lotro_api_key'];
+		$world_name = $this->rp_params['world_name'];
 
 		$url = "http://data.lotro.com/" . $developer . "/" . $api_key ."/guildroster/w/";
 		$url .= rawurlencode( $world_name ) . "/g/";
 		$url .= rawurlencode( $this->guild_name );
 
-		$data = $this->getData( $url );
+		$data = RaidPlannerHelper::downloadData( $url );
 
 		$xml_parser =& JFactory::getXMLParser( 'simple' );
 		if (( !$xml_parser->loadString( $data ) ) || (!$xml_parser->document) ) {
@@ -64,7 +91,7 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 				'world_name'	=>	$xml_parser->document->guild[0]->attributes('world'),
 			);
 
-			$params = array_merge( $this->params, $params );
+			$params = array_merge( $this->rp_params, $params );
 			
 			$query = "UPDATE #__raidplanner_guild SET
 							guild_name=".$db->Quote($xml_parser->document->guild[0]->attributes('name')).",
@@ -139,9 +166,10 @@ class RaidPlannerPluginLotro extends RaidPlannerPlugin
 		}
 	}
 
-	public function loadCSS()
+	public function onRPLoadCSS()
 	{
-		JHTML::stylesheet('raidplanner_lotro.css', 'images/raidplanner/css/' );
+		$document = JFactory::getDocument();
+		$document->addStyleSheet( 'media/com_raidplanner/css/raidplanner_lotro.css' );
 		
 		return true;
 	}

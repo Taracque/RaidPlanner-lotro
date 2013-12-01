@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" method="upgrade" group="raidplanner" version="2.5">
+	<name>RaidPlanner Lotro Theme</name>
+	<creationDate>2012-05-08</creationDate>
+	<author>Taracque</author>
+	<authorEmail>taracque@taracque.hu</authorEmail>
+	<authorUrl>http://taracque.hu</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>http://www.gnu.org/licenseses/gpl-2.0.html GNU/GPL</license>
+	<version>0.0.2</version>
+	<releaseDate>2013-12-01</releaseDate>
+	<releaseType>Development release</releaseType>
+	<description>RaidPlanner Lord of the Rings Plugin</description>
+	<rostersync>true</rostersync>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install.mysql.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">uninstall.mysql.sql</file>
+		</sql>
+	</uninstall>
+	<media folder="media" destination="com_raidplanner">
+		<file destination="raid_icons">raid_icons/barad_guldur.png</file>
+		<file destination="raid_icons">raid_icons/carn_dûm.png</file>
+		<file destination="raid_icons">raid_icons/dar_narbugud.png</file>
+		<file destination="raid_icons">raid_icons/draigoch's_lair.png</file>
+		<file destination="raid_icons">raid_icons/helegrod.png</file>
+		<file destination="raid_icons">raid_icons/lord_of_the_rings.png</file>
+		<file destination="raid_icons">raid_icons/ost_dungoth.png</file>
+		<file destination="raid_icons">raid_icons/rp_event.png</file>
+		<file destination="raid_icons">raid_icons/the_rift_of_nûrz_ghâshu.png</file>
+		<file destination="raid_icons">raid_icons/the_tower_of_orthanc.png</file>
+		<file destination="raid_icons">raid_icons/the_vile_maw.png</file>
+		<file destination="role_icons">role_icons/role_heal.png</file>
+		<file destination="role_icons">role_icons/role_melee_dps.png</file>
+		<file destination="role_icons">role_icons/role_ranged_dps.png</file>
+		<file destination="role_icons">role_icons/role_tank.png</file>
+		<file destination="role_icons">role_icons/role_buffer.png</file>
+		<file destination="role_icons">role_icons/role_debuffer.png</file>
+		<file destination="role_icons">role_icons/role_cc.png</file>
+		<file destination="class_icons">class_icons/lotro_burglar.png</file>
+		<file destination="class_icons">class_icons/lotro_captain.png</file>
+		<file destination="class_icons">class_icons/lotro_champion.png</file>
+		<file destination="class_icons">class_icons/lotro_guardian.png</file>
+		<file destination="class_icons">class_icons/lotro_hunter.png</file>
+		<file destination="class_icons">class_icons/lotro_lore_master.png</file>
+		<file destination="class_icons">class_icons/lotro_minstrel.png</file>
+		<file destination="class_icons">class_icons/lotro_rune_keeper.png</file>
+		<file destination="class_icons">class_icons/lotro_warden.png</file>
+		<file destionation="css">css/raidplanner_lotro.css</file>
+	</media>
+	<files>
+		<filename plugin="lotro">lotro.php</filename>
+		<filename>index.html</filename>
+		<filename>uninstall.mysql.sql</filename>
+		<filename>install.mysql.sql</filename>
+	</files>
+	<params>
+		<param type="text" name="developer_name" label="Developer Name" />
+		<param type="text" name="lotro_api_key" label="API Key" />
+		<param type="text" name="world_name" label="World name" />
+	</params>
+</install>
