@@ -20,6 +20,7 @@ class RaidPlannerPluginLotro extends JPlugin
 	public function onRPInitGuild( $guildId, $params )
 	{
 		$db = & JFactory::getDBO();
+
 		$query = "SELECT guild_name,guild_id FROM #__raidplanner_guild WHERE guild_id=" . intval($guildId); 
 		$db->setQuery($query);
 		if ( $data = $db->loadObject() )
@@ -65,8 +66,11 @@ class RaidPlannerPluginLotro extends JPlugin
 
 		$xml_parser =& JFactory::getXMLParser( 'simple' );
 		if (( !$xml_parser->loadString( $data ) ) || (!$xml_parser->document) ) {
-			JError::raiseWarning('100','LotroSync data decoding error');
-			return null;
+			if (json_last_error() != JSON_ERROR_NONE)
+			{
+				JError::raiseWarning('100','LotroSync data decoding error');
+				return null;
+			}
 		}
 		if ($xml_parser->document->name() != 'apiresponse')
 		{
@@ -166,11 +170,21 @@ class RaidPlannerPluginLotro extends JPlugin
 		}
 	}
 
+	public function onRPGetCharacterLink( $char_name )
+	{
+		return "#";
+	}
+
+	public function onRPGetGuildHeader()
+	{
+		return "<h2>" . $this->guild_name . "</h2>";
+	}
+
 	public function onRPLoadCSS()
 	{
 		$document = JFactory::getDocument();
 		$document->addStyleSheet( 'media/com_raidplanner/css/raidplanner_lotro.css' );
-		
+	
 		return true;
 	}
 }

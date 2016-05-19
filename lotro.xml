@@ -7,8 +7,8 @@
 	<authorUrl>http://taracque.hu</authorUrl>
 	<copyright>Copyright Info</copyright>
 	<license>http://www.gnu.org/licenseses/gpl-2.0.html GNU/GPL</license>
-	<version>0.0.2</version>
-	<releaseDate>2013-12-01</releaseDate>
+	<version>0.0.3</version>
+	<releaseDate>2015-05-19</releaseDate>
 	<releaseType>Development release</releaseType>
 	<description>RaidPlanner Lord of the Rings Plugin</description>
 	<rostersync>true</rostersync>
